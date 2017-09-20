@@ -14,14 +14,15 @@ class Tracker {
     ];
   }
 
-  protected function request($pathname, $options) {
+  protected function request($pathname, $options, $request_options) {
     $url = self::ENDPOINT . $pathname;
 
-    $response = $this->client->request('POST', $url, [
-      'headers' => $this->headers,
-      'json' => $options,
-      'http_errors' => false
-    ]);
+    $request_options_copy = $request_options;
+    $request_options_copy['headers'] = $this->headers;
+    $request_options_copy['http_errors'] = false;
+    $request_options_copy['json'] = $options;
+
+    $response = $this->client->request('POST', $url, $request_options_copy);
 
     $json = $response->getBody()->getContents();
     $data = json_decode($json, true);
@@ -33,15 +34,15 @@ class Tracker {
     return $data;
   }
 
-  public function trackContent($options) {
-    return self::request('/track/content', $options);
+  public function trackContent($options, $request_options = NULL) {
+    return self::request('/track/content', $options, $request_options);
   }
 
-  public function trackFlag($options) {
-    return self::request('/track/flag', $options);
+  public function trackFlag($options, $request_options = NULL) {
+    return self::request('/track/flag', $options, $request_options);
   }
 
-  public function trackModeration($options) {
-    return self::request('/track/moderation', $options);
+  public function trackModeration($options, $request_options = NULL) {
+    return self::request('/track/moderation', $options, $request_options);
   }
 }
