@@ -12,3 +12,8 @@
 ==================
 
   * Changed Guzzle to 6.1.1 for improved compatibility.
+
+0.0.9 / 2017-09-19
+==================
+
+  * Allow Guzzle options to be passed per request.
