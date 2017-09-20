@@ -19,7 +19,7 @@ use Koko\Tracker;
 $koko = new Tracker(['auth' => 'YOUR_AUTH_KEY']);
 ```
 
-Track content, see more [here](https://docs.koko.ai/#track-endpoints).
+Track content, see more [here](https://docs.koko.ai/#track-endpoints). These methods also take Guzzle request options as an optional second argument, so that you may override `proxy` and other settings.
 
 ```php
 $classification = $koko->trackContent([
