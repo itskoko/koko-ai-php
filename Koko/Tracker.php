@@ -23,10 +23,14 @@ class Tracker {
     $request_options_copy['json'] = $options;
 
     $response = $this->client->request('POST', $url, $request_options_copy);
+    $contents = $response->getBody()->getContents();
 
-    $json = $response->getBody()->getContents();
-    $data = json_decode($json, true);
+    $status = $response->getStatusCode();
+    if ($status >= 500) {
+      throw new \Exception($contents);
+    }
 
+    $data = json_decode($contents, true);
     if (array_key_exists('errors', $data)) {
       throw new \Exception(join('\n', $data['errors']));
     }
