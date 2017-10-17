@@ -19,6 +19,11 @@
   * Allow Guzzle options to be passed per request.
 
 0.0.10 / 2017-09-27
-==================
+===================
 
   * Handle 500 errors more gracefully.
+
+1.0.2 / 2017-10-17
+==================
+
+  * Loosen Guzzle version requirement.
