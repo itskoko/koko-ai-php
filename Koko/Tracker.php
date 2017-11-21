@@ -26,7 +26,7 @@ class Tracker {
     $contents = $response->getBody()->getContents();
 
     $status = $response->getStatusCode();
-    if ($status >= 500) {
+    if ($status != 200) {
       throw new \Exception($contents);
     }
 
