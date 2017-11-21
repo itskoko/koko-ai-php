@@ -27,3 +27,8 @@
 ==================
 
   * Loosen Guzzle version requirement.
+
+1.0.3 / 2017-11-21
+==================
+
+  * Improve error handling for application/json & text/plain.
