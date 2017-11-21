@@ -25,18 +25,20 @@ class Tracker {
     $response = $this->client->request('POST', $url, $request_options_copy);
     $contents = $response->getBody()->getContents();
 
-    $status = $response->getStatusCode();
-    if ($status != 200) {
-      throw new \Exception($contents);
-    }
+    try {
+      $data = json_decode($contents, true);
 
-    $data = json_decode($contents, true);
-    if (!is_array($data)) {
+      if (!is_array($data)) {
         throw new \Exception('No response data returned.');
+      }
+
+      if (array_key_exists('errors', $data)) {
+        throw new \Exception(join('\n', $data['errors']));
+      }
     }
 
-    if (array_key_exists('errors', $data)) {
-      throw new \Exception(join('\n', $data['errors']));
+    catch (Exception $e) {
+      throw new \Exception($contents);
     }
 
     return $data;
