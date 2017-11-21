@@ -31,6 +31,10 @@ class Tracker {
     }
 
     $data = json_decode($contents, true);
+    if (!is_array($data)) {
+        throw new \Exception('No response data returned.');
+    }
+
     if (array_key_exists('errors', $data)) {
       throw new \Exception(join('\n', $data['errors']));
     }
